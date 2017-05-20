@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Example App</title>
+</head>
+
+<body>
+
+    {{{body}}}
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            var form1 = $('#myForm'),
+                form2 = $('#followForm'),
+                form3 = $('#retweetForm'),
+                form4 = $('#likeForm');
+
+            $("button.tweet").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: 'http://localhost:3000/',
+                    data: form1.serialize(),
+                    success: function (data) {
+                        console.log("success!");
+                        $(".output").append(`<p>${data.theTweet}</p>`);
+                        console.log(JSON.stringify(data));
+
+                        $('#myForm')[0].reset();
+                    }
+                });
+                return false;
+            });
+            $("button.follow").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: 'http://localhost:3000/',
+                    data: form2.serialize(),
+                    success: function (data) {
+                        console.log("success!");
+                        $(".output").append(`<p>${data.theUser}</p>`);
+                        console.log(JSON.stringify(data));
+
+                        $('#followForm')[0].reset();
+                    }
+                });
+                return false;
+            });
+
+            $("button.retweet").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: 'http://localhost:3000/',
+                    data: form3.serialize(),
+                    success: function (data) {
+                        console.log("success!");
+                        $(".output").append(`<p>${data.theRetweet}</p>`);
+                        console.log(JSON.stringify(data));
+
+                        $('#retweetForm')[0].reset();
+                    }
+                });
+                return false;
+            });
+
+            $("button.like").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: 'http://localhost:3000/',
+                    data: form4.serialize(),
+                    success: function (data) {
+                        console.log("success!");
+                        $(".output").append(`<p>${data.theLike}</p>`);
+                        console.log(JSON.stringify(data));
+
+                        $('#likeForm')[0].reset();
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>

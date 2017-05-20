@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="form1" method="post" action="/test">
+
+        <input type="test" name="field1">
+        <button type="submit">Submit</button>
+    </form>
+    <input type="test" name="field2">
+    <!--<input type="submit" name="1">-->
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            var form = $('#form1');
+            $("button").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: 'http://localhost:3000/test',
+                    data: form.serialize(),
+                    success: function(data){
+                        console.log("success!");
+                        console.log(JSON.stringify(data));
+
+                       $('#form1')[0].reset();
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>
