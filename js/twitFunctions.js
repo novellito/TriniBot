@@ -46,7 +46,7 @@ module.exports.retweet = (something) => {
 
         if (!err) {
 
-            var retweetId = data.statuses[0].id_str; //retrieves the first status essentially 
+            var retweetId = data.statuses[0].id_str; //retrieves the first status essentially
             T.post('statuses/retweet/:id', {
                 id: retweetId
             }, function (err, response) {
@@ -86,7 +86,7 @@ module.exports.like = (something) => {
     });
 }
 
-function random (arr) {
-  var index = Math.floor(Math.random()*arr.length);
-  return arr[index];
+function random(arr) {
+    var index = Math.floor(Math.random() * arr.length);
+    return arr[index];
 };

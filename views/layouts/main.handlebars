@@ -3,13 +3,63 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Example App</title>
+    <title>Christian's Twitter Bot</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+
+    <style>
+        body {
+            background-color: #4099FF;
+        }
+
+        #myForm,
+        #followForm,
+        #retweetForm,
+        #likeForm,
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .forms {
+            margin-top: 10%;
+        }
+
+        button:hover {
+            color: #4099FF;
+        }
+
+        a {
+            color: white;
+        }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        .output {
+            display: inline;
+        }
+
+        p {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .output4>a {
+            margin-top 15px;
+        }
+    </style>
 </head>
 
 <body>
 
     {{{body}}}
-
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
@@ -28,10 +78,7 @@
                     data: form1.serialize(),
                     success: function (data) {
                         console.log("success!");
-                        $(".output").append(`<p>${data.theTweet}</p>`);
-                        console.log(JSON.stringify(data));
-
-                        $('#myForm')[0].reset();
+                        outputs('.output1', `<p>You Tweeted " ${data.theTweet} "</p>`, '#myForm');
                     }
                 });
                 return false;
@@ -43,10 +90,7 @@
                     data: form2.serialize(),
                     success: function (data) {
                         console.log("success!");
-                        $(".output").append(`<p>${data.theUser}</p>`);
-                        console.log(JSON.stringify(data));
-
-                        $('#followForm')[0].reset();
+                        outputs('.output2', `<p>You followed someone!</p>`, '#followForm');
                     }
                 });
                 return false;
@@ -59,10 +103,7 @@
                     data: form3.serialize(),
                     success: function (data) {
                         console.log("success!");
-                        $(".output").append(`<p>${data.theRetweet}</p>`);
-                        console.log(JSON.stringify(data));
-
-                        $('#retweetForm')[0].reset();
+                        outputs('.output3', `<p>You retweeted somthing about "${data.theRetweet}"</p>`, '#retweetForm');
                     }
                 });
                 return false;
@@ -75,15 +116,25 @@
                     data: form4.serialize(),
                     success: function (data) {
                         console.log("success!");
-                        $(".output").append(`<p>${data.theLike}</p>`);
-                        console.log(JSON.stringify(data));
-
-                        $('#likeForm')[0].reset();
+                        outputs('.output4', ` <a href="https://twitter.com/i/likes" target="_blank">See what you liked!</a>`, '#likeForm');
                     }
                 });
                 return false;
             });
         });
+
+        function outputs(output, message, formType) {
+            if ($(output).children().length == 0) {
+                $(output).append(message);
+
+                $(formType)[0].reset();
+            } else {
+                $(`${output} > p`).detach();
+                $(`${output} > a`).detach();
+                $(output).append(message);
+                $(formType)[0].reset();
+            }
+        }
     </script>
 </body>
 
