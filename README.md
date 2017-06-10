@@ -24,4 +24,8 @@ This is my first bot made using the [Twitter api](https://dev.twitter.com/rest/p
 
 * The bot conducts sentiment analysis using [this node module](https://github.com/thisandagain/sentiment) every set inteval.
 
+![guibot](https://user-images.githubusercontent.com/21237266/27006328-2e892754-4de6-11e7-88c1-d78dc2a8e538.JPG)
+
+A simple gui for the bot.
+
 
